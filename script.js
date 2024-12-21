@@ -15,6 +15,7 @@ const fetchApi = async () => {
     const artistGenre = data.items.map((artist) => {
       const genreId = artist.fields.genre.sys.id;
       const stageId = artist.fields.stage.sys.id;
+      const dayId = artist.fields.day.sys.id;
 
       const genre = data.includes.Entry.find(
         (entry) => entry.sys.id === genreId
@@ -24,6 +25,8 @@ const fetchApi = async () => {
       const stage = data.includes.Entry.find(
         (entry) => entry.sys.id === stageId
       );
+      //day
+      const day = data.includes.Entry.find((entry) => entry.sys.id === dayId);
 
       return {
         name: artist.fields.name,
@@ -31,6 +34,7 @@ const fetchApi = async () => {
         // Genre
         genre: genre.fields.name,
         stage: stage.fields.name,
+        day: day.fields.description,
       };
     });
 
@@ -56,8 +60,9 @@ const fetchApi = async () => {
           <div class="card">
           <h3>${artist.name}</h3>
           <p>${artist.description}</p>
-          <p>Genre: ${artist.genre}</p>
-          <p>Stage: ${artist.stage}</p>
+          <p><span>Genre:</span> ${artist.genre}</p>
+          <p><span>Stage:</span> ${artist.stage}</p>
+           <p><span>When:</span> ${artist.day}</p>
           </div>`;
         })
         .join("");
