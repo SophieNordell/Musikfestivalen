@@ -1,6 +1,6 @@
 /* Global styling */
 body {
-  font-family: "Arial", sans-serif;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   margin: 0;
   padding: 0;
   display: flex;
@@ -57,7 +57,7 @@ body {
   background: rgba(0, 0, 0, 0.6);
   border-radius: 10px;
   margin-bottom: 20px;
-  width: 95%;
+  width: 100%;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-align: center;
@@ -66,11 +66,11 @@ body {
 .card:hover {
   transform: translateY(-10px);
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.6);
+  background: rgba(255, 106, 0, 0.7);
 }
 
-/* Stil på artistens namn */
 .card h3 {
-  font-size: 25px;
+  font: 400px;
   margin: 0;
   color: #ffdd57;
   font-weight: bold;
@@ -81,11 +81,24 @@ body {
   font-weight: bold;
 }
 
-/* Stil på beskrivning */
 .card p {
-  font-size: 14px;
+  height: 70px;
+  font-size: 16px;
   margin: 10px 0;
   line-height: 1.5;
+  padding: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: transform 0.3s ease;
+}
+.card:hover h3 {
+  transform: scale(1.2);
+  transition: font-size 0.3s ease;
+}
+
+.card:hover p {
+  font-size: 16px;
+  transition: font-size 0.3s ease;
 }
 
 /* Media Queries för större skärmar */

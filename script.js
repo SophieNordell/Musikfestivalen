@@ -11,7 +11,7 @@ const fetchApi = async () => {
     }
     const data = await response.json();
 
-    //mapar igenom items (innehåller all data)
+    // Samla artist- och genredata
     const artistGenre = data.items.map((artist) => {
       const genreId = artist.fields.genre.sys.id;
       const stageId = artist.fields.stage.sys.id;
@@ -20,7 +20,7 @@ const fetchApi = async () => {
         (entry) => entry.sys.id === genreId
       );
 
-      //stage
+      // Stage
       const stage = data.includes.Entry.find(
         (entry) => entry.sys.id === stageId
       );
@@ -28,26 +28,59 @@ const fetchApi = async () => {
       return {
         name: artist.fields.name,
         description: artist.fields.description,
-        //genre
+        // Genre
         genre: genre.fields.name,
         stage: stage.fields.name,
       };
     });
+
+    // Hämta unika genrer
+    const genres = [...new Set(artistGenre.map((artist) => artist.genre))];
+
+    // Fyll dropdown med genrer
+    const genreSelect = document.getElementById("genre-select");
+    genres.forEach((genre) => {
+      const option = document.createElement("option");
+      option.value = genre;
+      option.textContent = genre;
+      genreSelect.appendChild(option);
+    });
+
     const container = document.querySelector(".container-div");
 
-    const artists = artistGenre
-      .map((artist) => {
-        return `
-        <div class="card">
-        <h3>${artist.name}</h3>
-        <p>${artist.description}</p>
-        <p>Genre:${artist.genre}</p>
-        <p>Stage:${artist.stage}</p>
-        </div>`;
-      })
-      .join("");
+    // Funktion för att rendera artister
+    const renderArtists = (filteredArtists) => {
+      const artists = filteredArtists
+        .map((artist) => {
+          return `
+          <div class="card">
+          <h3>${artist.name}</h3>
+          <p>${artist.description}</p>
+          <p>Genre: ${artist.genre}</p>
+          <p>Stage: ${artist.stage}</p>
+          </div>`;
+        })
+        .join("");
 
-    container.innerHTML = artists;
+      container.innerHTML = artists;
+    };
+
+    // Visa alla artister som standard
+    renderArtists(artistGenre);
+
+    // Lyssna på ändring av dropdown
+    genreSelect.addEventListener("change", (event) => {
+      const selectedGenre = event.target.value;
+
+      if (selectedGenre === "all") {
+        renderArtists(artistGenre); // Visa alla artister
+      } else {
+        const filteredArtists = artistGenre.filter(
+          (artist) => artist.genre === selectedGenre
+        );
+        renderArtists(filteredArtists); // Visa filtrerade artister
+      }
+    });
 
     console.log(data);
   } catch (error) {
