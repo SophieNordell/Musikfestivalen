@@ -43,7 +43,7 @@ body {
 }
 
 .artister-h3 {
-  font-size: 2em; /* Större textstorlek */
+  font-size: 2em;
   text-align: left;
   color: #ffdd57;
 }
@@ -69,6 +69,13 @@ body {
   text-align: center;
   max-width: 90%;
   padding: 8px;
+}
+
+.artist-img {
+  width: 300px;
+  height: auto;
+  border-radius: 10px;
+  margin: 10px 0;
 }
 
 .card span {
@@ -106,10 +113,10 @@ body {
 .card:hover p:last-child {
   font-size: 20px;
   transition: font-size 0.3s ease;
-  color: #ee0979;
+  color: orange;
 }
 
-/* Dropdown styling */
+/* Dropdown*/
 #genre-select {
   background-color: rgba(255, 106, 0, 0.8);
   color: white;
@@ -157,11 +164,6 @@ body {
   font-size: 16px;
 }
 
-#genre-select option:hover {
-  background-color: #ee0979;
-}
-
-/* Footer styling */
 .footer {
   width: 100%;
   background-color: #ff6a00;
