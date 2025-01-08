@@ -11,6 +11,7 @@ const fetchApi = async () => {
     }
     const data = await response.json();
 
+    // formaterar tiden och datum
     const formatDateAndTime = (dateString) => {
       const date = new Date(dateString);
       const options = {
