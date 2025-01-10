@@ -1,6 +1,6 @@
-const spaceId = localStorage.getItem("spaceId");
-const accessToken = localStorage.getItem("accessToken");
-const url = `https://cdn.contentful.com/spaces/${spaceId}/entries?access_token=${accessToken}&content_type=artist`;
+const space_Id = localStorage.getItem("space_Id");
+const access_Token = localStorage.getItem("access_Token");
+const url = `https://cdn.contentful.com/spaces/${space_Id}/entries?access_token=${access_Token}&content_type=artist`;
 
 const fetchApi = async () => {
   try {
